@@ -83,7 +83,11 @@ ct_players = CentroidTracker()
 # append players positions at each frame
 players_positions = {'x_0': [], 'y_0': [], 'x_1': [], 'y_1': []}
 
+start_time = time.time()
+
 outs = run(source = input_video_path)
+
+print("Time to detect people: " + str(time.time() - start_time))
 
 start_time = time.time()
 
