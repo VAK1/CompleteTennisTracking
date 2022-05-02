@@ -13,6 +13,8 @@ from TrackPlayers.trackplayers import *
 from Court.court import *
 from yolov3.detect import run
 
+import time
+
 
 # parse parameters
 parser = argparse.ArgumentParser()
@@ -83,9 +85,12 @@ players_positions = {'x_0': [], 'y_0': [], 'x_1': [], 'y_1': []}
 
 outs = run(source = input_video_path)
 
+start_time = time.time()
+
 while (True):
 
     print('Percentage of video processed : {}'.format(round( (currentFrame / total) * 100, 2)))
+    print('Time: ' + str(time.time()-start_time))
 
     # capture frame-by-frame
     video.set(1, currentFrame);
@@ -214,6 +219,7 @@ while (True):
     # next frame
     currentFrame += 1
 
+print("Final Time: " + str(time.time() - start_time))
 
 # everything is done, release the video
 video.release()
