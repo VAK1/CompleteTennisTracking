@@ -83,18 +83,19 @@ ct_players = CentroidTracker()
 # append players positions at each frame
 players_positions = {'x_0': [], 'y_0': [], 'x_1': [], 'y_1': []}
 
-start_time = time.time()
+
+first_start_time = time.time()
 
 outs = run(source = input_video_path)
 
-print("Time to detect people: " + str(time.time() - start_time))
+print("Time to detect people: " + str(time.time() - first_start_time) + " seconds")
 
 start_time = time.time()
 
 while (True):
 
     print('Percentage of video processed : {}'.format(round( (currentFrame / total) * 100, 2)))
-    print('Time: ' + str(time.time()-start_time))
+    print('Time: ' + str(time.time()-start_time) + " seconds")
     start_time = time.time()
 
     # capture frame-by-frame
@@ -224,7 +225,7 @@ while (True):
     # next frame
     currentFrame += 1
 
-print("Final Time: " + str(time.time() - start_time))
+print("Final Time: " + str(time.time() - first_start_time) + " seconds")
 
 # everything is done, release the video
 video.release()
