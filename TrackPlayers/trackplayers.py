@@ -49,7 +49,7 @@ def predict_players(outs, LABELS, img, confidence_threshold=0.8):
         class_id = int(detection[5])
         confidence = detection[4]
 
-        if confidence > conf_threshold and LABELS[class_id] == 'person':
+        if confidence > conf_threshold and class_id == 0:
 
             x = int(detection[0])
             y = int(detection[1])

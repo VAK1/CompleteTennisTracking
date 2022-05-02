@@ -23,9 +23,6 @@ parser.add_argument("--output_video_path", type=str, default="")
 parser.add_argument("--save_weights_path", type=str)
 parser.add_argument("--n_classes", type=int)
 
-parser.add_argument("--path_yolo_classes", type=str)
-parser.add_argument("--path_yolo_weights", type=str)
-parser.add_argument("--path_yolo_config", type=str)
 
 args = parser.parse_args()
 
@@ -36,9 +33,6 @@ output_video_path = args.output_video_path
 save_weights_path = args.save_weights_path
 n_classes = args.n_classes
 
-yolo_classes = args.path_yolo_classes
-yolo_weights = args.path_yolo_weights
-yolo_config = args.path_yolo_config
 
 if output_video_path == "":
     # output video in same path
@@ -81,9 +75,6 @@ for i in range(0, 8):
 # Tutorial: https://stackoverflow.com/questions/33631489/error-during-saving-a-video-using-python-and-opencv
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
 output_video = cv2.VideoWriter(output_video_path, fourcc, fps, (output_width, output_height))
-
-# load yolov3 labels
-LABELS = open(yolo_classes).read().strip().split("\n")
 
 # players tracker
 ct_players = CentroidTracker()
