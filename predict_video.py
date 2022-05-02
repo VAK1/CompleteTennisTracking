@@ -209,6 +209,7 @@ while (True):
     opencvImage = cv2.cvtColor(np.array(PIL_image), cv2.COLOR_RGB2BGR)
     # write image to output_video
     output_video.write(opencvImage)
+    cv2.imwrite('frames/' + str(currentFrame) + '.jpg', opencvImage)
 
     # next frame
     currentFrame += 1
