@@ -12,19 +12,27 @@ def get_output_layers(net):
 
 
 def binary(x):
-	# transform an image in black and white
+    # transform an image in black and white
     if x == 0:
         return 0
     else:
         return 255
 
+def xyxy2xywh(x):
+    # Convert nx4 boxes from [x1, y1, x2, y2] to [x, y, w, h] where xy1=top-left, xy2=bottom-right
+    y = np.copy(x)
+    y[2] = x[2] - x[0]  # width
+    y[3] = x[3] - x[1]  # height
+    return y
+
+
 
 def remove_ball_boy(detected_person_img, lower_col, upper_col):
-	# compute pixel percentage of a range of color (lower_col, upper_col)
-	# in each box to detect ball boys/girls
+    # compute pixel percentage of a range of color (lower_col, upper_col)
+    # in each box to detect ball boys/girls
     mask = cv2.inRange(detected_person_img, lower_col, upper_col)
     img = cv2.bitwise_and(detected_person_img, detected_person_img,\
-    	                  mask=mask)
+                          mask=mask)
     func = np.vectorize(binary)
     img = func(img).astype(np.uint8)
 
@@ -42,6 +50,8 @@ def predict_players(outs, img, confidence_threshold=0.8):
     nms_threshold = 0.00000000001
     Width = img.shape[1]
     Height = img.shape[0]
+    ratio_h = Width/640
+    ratio_v = Height/384
 
     predicted_players = []
 
@@ -51,10 +61,15 @@ def predict_players(outs, img, confidence_threshold=0.8):
 
         if confidence > conf_threshold and class_id == 0:
 
-            x = int(detection[0])
-            y = int(detection[1])
-            w = int(detection[2] - detection[0])
-            h = int(detection[3] - detection[1])
+            x, y, w, h = xyxy2xywh(detection[:4])
+            print(x, y, w, h)
+            x = int(x*ratio_h)
+            w = int(w*ratio_h)
+            y = int(y*ratio_v)
+            h = int(h*ratio_v)
+
+            print(x, y, w, h)
+
 
             taux = remove_ball_boy(img[y:y + h, x:x + w],\
                         (27, 5, 40), (47, 40, 168))
