@@ -73,7 +73,7 @@ for i in range(0, 8):
 
 # save prediction images as videos
 # Tutorial: https://stackoverflow.com/questions/33631489/error-during-saving-a-video-using-python-and-opencv
-fourcc = cv2.VideoWriter_fourcc(*'XVID')
+fourcc = cv2.VideoWriter_fourcc('M','J','P','G')
 output_video = cv2.VideoWriter(output_video_path, fourcc, fps, (output_width, output_height))
 
 # players tracker
