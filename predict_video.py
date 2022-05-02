@@ -91,6 +91,7 @@ while (True):
 
     print('Percentage of video processed : {}'.format(round( (currentFrame / total) * 100, 2)))
     print('Time: ' + str(time.time()-start_time))
+    start_time = time.time()
 
     # capture frame-by-frame
     video.set(1, currentFrame);
