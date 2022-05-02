@@ -34,7 +34,7 @@ def remove_ball_boy(detected_person_img, lower_col, upper_col):
     return n_pix_bb / n_pix
 
 
-def predict_players(outs, LABELS, img, confidence_threshold=0.8):
+def predict_players(outs, img, confidence_threshold=0.8):
     class_ids = []
     confidences = []
     boxes = []

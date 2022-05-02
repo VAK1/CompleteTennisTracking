@@ -99,7 +99,7 @@ while (True):
     # detect players
     scale = 0.00392
     blob = cv2.dnn.blobFromImage(img, scale, (416, 416), (0, 0, 0), True, crop=False)
-    detected_players = predict_players(outs[currentFrame], LABELS, img, 0.8)
+    detected_players = predict_players(outs[currentFrame], img, 0.8)
 
     # track players with a unique ID
     formate_detected_players = list(map(update_boxes, list(detected_players)))
