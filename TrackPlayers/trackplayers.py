@@ -62,18 +62,15 @@ def predict_players(outs, img, confidence_threshold=0.8):
         if confidence > conf_threshold and class_id == 0:
 
             x, y, w, h = xyxy2xywh(detection[:4])
-            print(x, y, w, h)
             x = int(x*ratio_h)
             w = int(w*ratio_h)
             y = int(y*ratio_v)
             h = int(h*ratio_v)
 
-            print(x, y, w, h)
 
 
             taux = remove_ball_boy(img[y:y + h, x:x + w],\
                         (27, 5, 40), (47, 40, 168))
-            print(taux)
             if taux < 0.01:
                 class_ids.append(class_id)
                 confidences.append(float(confidence))
@@ -91,7 +88,6 @@ def predict_players(outs, img, confidence_threshold=0.8):
 
     # sometimes, two identical frames remain
     predicted_players = list(set(predicted_players))
-    print(predicted_players)
 
     return predicted_players
 
